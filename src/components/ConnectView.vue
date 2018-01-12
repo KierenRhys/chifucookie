@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     connect (login, pass) {
-      this.$http.get('http://chifucookie.cleverapps.io/public/user/dev/pass').then(response => {
+      this.$http.get('http://chifucookieapi.cleverapps.io/public/user/dev/' + pass + '').then(response => {
         this.id = response.body.id
         this.$cookie.set('userid', this.id)
       }).then(this.$router.push('/game'))

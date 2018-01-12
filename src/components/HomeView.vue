@@ -123,26 +123,26 @@ export default {
     win (nbCookie, baitValue) {
       alert('You win !')
       this.cookies = nbCookie * (1 + (baitValue / 100))
-      this.$http.put('http://chifucookie.cleverapps.io/public/cookies/1/' + this.cookies + '')
+      this.$http.put('http://chifucookieapi.cleverapps.io/public/cookies/' + this.userid + '/' + this.cookies + '')
     },
     lose (nbCookie, baitValue) {
       alert('You lose !')
       this.cookies = nbCookie * (1 - (baitValue / 100))
-      this.$http.put('http://chifucookie.cleverapps.io/public/cookies/1/' + this.cookies + '')
+      this.$http.put('http://chifucookieapi.cleverapps.io/public/cookies/' + this.userid + '/' + this.cookies + '')
     },
     buy (nbCookie) {
       this.cookies += nbCookie
-      this.$http.put('http://chifucookie.cleverapps.io/public/cookies/1/' + this.cookies + '')
+      this.$http.put('http://chifucookieapi.cleverapps.io/public/cookies/' + this.userid + '/' + this.cookies + '')
     },
     disconnect () {
       this.$cookie.delete('userid')
     }
   },
   mounted () {
-    this.$http.get('http://chifucookie.cleverapps.io/public/cookies/1').then(response => {
+    this.$http.get('http://chifucookieapi.cleverapps.io/public/cookies/' + this.userid).then(response => {
       this.cookies = parseInt(response.body.cookies)
     })
-    this.$http.get('http://chifucookie.cleverapps.io/public/rank').then(response => {
+    this.$http.get('http://chifucookieapi.cleverapps.io/public/rank').then(response => {
       this.rank = response.body
     })
   }
