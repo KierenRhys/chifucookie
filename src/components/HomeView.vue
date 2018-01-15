@@ -6,17 +6,17 @@
         <router-link class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" to="/login" @click.native="disconnect">Logout</router-link>
       </div>
       <div class="actions">
-        <span>Bait {{Math.round(this.cookies * (0 + (baitValue / 100))) }} cookies ({{ baitValue }}%)</span>
+        <span>Bet {{Math.round(this.cookies * (0 + (betValue / 100))) }} cookies ({{ betValue }}%)</span>
         <p style="width:300px">
-          <input class="mdl-slider mdl-js-slider" type="range" id="baitRange" min="5" max="100" v-bind:value="baitValue" step="1" v-on:input="onChange($event)">
+          <input class="mdl-slider mdl-js-slider" type="range" id="betRange" min="5" max="100" v-bind:value="betValue" step="1" v-on:input="onChange($event)">
         </p>
-        <img src="../../static/img/rock.png" alt="Rock" height="128" width="128" v-on:click="bait(0, baitValue)"> 
-        <img src="../../static/img/leaf.png" alt="Leaf" height="128" width="128" v-on:click="bait(1, baitValue)"> 
-        <img src="../../static/img/scissor.png" alt="Scissor" height="128" width="128" v-on:click="bait(2,baitValue)"> 
+        <img src="../../static/img/rock.png" alt="Rock" height="128" width="128" v-on:click="bet(0, betValue)"> 
+        <img src="../../static/img/leaf.png" alt="Leaf" height="128" width="128" v-on:click="bet(1, betValue)"> 
+        <img src="../../static/img/scissor.png" alt="Scissor" height="128" width="128" v-on:click="bet(2,betValue)"> 
       </div>
     </div>
     <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
-      <div class="ranktitle">The best CookieBaiters</div>
+      <div class="ranktitle">The best CookieBeters</div>
       <ul class="demo-list-two mdl-list" v-for="best in rank">
         <li class="mdl-list__item mdl-list__item--two-line">
           <span class="mdl-list__item-primary-content">
@@ -85,49 +85,49 @@ export default {
       'cookies': 0,
       'rank': [],
       'counter': 1,
-      baitValue: 5
+      betValue: 5
     }
   },
   methods: {
     onChange (e) {
-      this.baitValue = e.target.value
+      this.betValue = e.target.value
     },
-    bait (playerMove, baitValue) {
+    bet (playerMove, betValue) {
       this.pcPlay = Math.floor(Math.random() * Math.floor(3))
       if (playerMove === this.pcPlay) {
         alert('Draw, nothing change')
       } else {
         if (playerMove === 0) {
           if (this.pcPlay === 2) {
-            this.win(this.cookies, baitValue)
+            this.win(this.cookies, betValue)
           } else {
-            this.lose(this.cookies, baitValue)
+            this.lose(this.cookies, betValue)
           }
         }
         if (playerMove === 1) {
           if (this.pcPlay === 0) {
-            this.win(this.cookies, baitValue)
+            this.win(this.cookies, betValue)
           } else {
-            this.lose(this.cookies, baitValue)
+            this.lose(this.cookies, betValue)
           }
         }
         if (playerMove === 2) {
           if (this.pcPlay === 1) {
-            this.win(this.cookies, baitValue)
+            this.win(this.cookies, betValue)
           } else {
-            this.lose(this.cookies, baitValue)
+            this.lose(this.cookies, betValue)
           }
         }
       }
     },
-    win (nbCookie, baitValue) {
+    win (nbCookie, betValue) {
       alert('You win !')
-      this.cookies = nbCookie * (1 + (baitValue / 100))
+      this.cookies = nbCookie * (1 + (betValue / 100))
       this.$http.put('http://chifucookieapi.cleverapps.io/public/cookies/' + this.userid + '/' + this.cookies + '')
     },
-    lose (nbCookie, baitValue) {
+    lose (nbCookie, betValue) {
       alert('You lose !')
-      this.cookies = nbCookie * (1 - (baitValue / 100))
+      this.cookies = nbCookie * (1 - (betValue / 100))
       this.$http.put('http://chifucookieapi.cleverapps.io/public/cookies/' + this.userid + '/' + this.cookies + '')
     },
     buy (nbCookie) {
