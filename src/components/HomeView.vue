@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
-      <div class="ranktitle">The best CookieBeters</div>
+      <div class="ranktitle">The best CookieBettors</div>
       <ul class="demo-list-two mdl-list" v-for="best in rank">
         <li class="mdl-list__item mdl-list__item--two-line">
           <span class="mdl-list__item-primary-content">
